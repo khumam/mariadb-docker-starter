@@ -1,0 +1,21 @@
+version: '3'
+networks:
+  default:
+    driver: bridge
+services:
+  mariadb:
+    image: mariadb
+    container_name: localhost_mariadb
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: data
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - default
+    volumes:
+      - ./mysql:/var/lib/mysql
